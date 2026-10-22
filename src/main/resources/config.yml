@@ -1,0 +1,65 @@
+# mode: vanilla - оставить ванильное сообщение, hide - скрыть, replace - заменить текстом message.
+# Пустой message в режиме replace тоже скрывает сообщение.
+# Цвета: &a, а на 1.16+ ещё и &#RRGGBB.
+
+join:
+  mode: replace
+  message: "&e{player} &7зашёл на сервер"
+
+quit:
+  mode: replace
+  message: "&e{player} &7вышел с сервера"
+
+# Сообщение для остальных игроков о том, что игрока кикнули. Причина кика, которую видит сам игрок, не меняется.
+# Плейсхолдеры: {player}, {reason}.
+kick:
+  mode: replace
+  message: "&e{player} &7был кикнут с сервера: &c{reason}"
+
+# Плейсхолдеры: {player}, {killer}, {cause}.
+# Если для причины нет своего текста в causes, берётся общий message.
+# Порядок выбора: player (убил игрок), mob (убил моб), затем имя причины (fall, fire, lava и т.д.).
+# Пустая строка у причины скрывает сообщение для неё.
+death:
+  mode: replace
+  message: "&c{player} &7погиб"
+  causes:
+    player: "&c{player} &7был убит игроком &c{killer}"
+    mob: "&c{player} &7был убит существом &c{killer}"
+    fall: "&c{player} &7разбился"
+    fire: "&c{player} &7сгорел"
+    fire_tick: "&c{player} &7сгорел"
+    lava: "&c{player} &7сварился в лаве"
+    drowning: "&c{player} &7утонул"
+    void: "&c{player} &7упал в бездну"
+    explosion: "&c{player} &7был взорван"
+  # Как называется причина в плейсхолдере {cause}. Если не указано, берётся имя причины.
+  names:
+    fall: "падение"
+    fire: "огонь"
+    fire_tick: "огонь"
+    lava: "лава"
+    drowning: "утопление"
+    void: "бездна"
+    entity_attack: "атака"
+    projectile: "снаряд"
+    suffocation: "удушье"
+    starvation: "голод"
+    contact: "кактус"
+    block_explosion: "взрыв"
+    entity_explosion: "взрыв"
+    lightning: "молния"
+    poison: "яд"
+    magic: "магия"
+    wither: "иссушение"
+    unknown: "неизвестно"
+
+# Плейсхолдеры: {player}, {advancement}.
+# Заменить и скрыть можно только на Paper и его форках (Purpur, Folia). На Spigot остаётся ванильное сообщение.
+advancement:
+  mode: replace
+  message: "&e{player} &7получил достижение &a{advancement}"
+
+reload-message: "&aКонфигурация sServerMessages перезагружена."
+error-message: "&cОшибка в config.yml, настройки не изменены. Подробности в консоли."
+no-permission-message: "&cУ вас нет прав на эту команду."

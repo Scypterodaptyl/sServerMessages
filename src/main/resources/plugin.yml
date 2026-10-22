@@ -1,0 +1,16 @@
+name: sServerMessages
+main: com.scypter.sservermessages.SServerMessages
+version: ${version}
+author: ScypterV
+description: Управление серверными сообщениями о входе, выходе, смерти, достижениях и кике.
+api-version: 1.13
+folia-supported: true
+commands:
+  sservermessages:
+    description: Управление sServerMessages
+    usage: /sservermessages reload
+    aliases: [ssm]
+permissions:
+  sservermessages.reload:
+    description: Перезагрузка config.yml
+    default: op

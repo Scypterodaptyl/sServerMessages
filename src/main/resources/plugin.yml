@@ -5,6 +5,7 @@ author: ScypterV
 description: Управление серверными сообщениями о входе, выходе, смерти, достижениях и кике.
 api-version: 1.13
 folia-supported: true
+softdepend: [PlaceholderAPI]
 commands:
   sservermessages:
     description: Управление sServerMessages
@@ -14,3 +15,6 @@ permissions:
   sservermessages.reload:
     description: Перезагрузка config.yml
     default: op
+  sservermessages.silent:
+    description: Вход, выход, смерть и достижения игрока без сообщений в чат
+    default: false

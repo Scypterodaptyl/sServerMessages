@@ -1,6 +1,23 @@
-# mode: vanilla - оставить ванильное сообщение, hide - скрыть, replace - заменить текстом message.
-# Пустой message в режиме replace тоже скрывает сообщение.
-# Цвета: &a, а на 1.16+ ещё и &#RRGGBB.
+# mode: vanilla | hide | replace. Empty message hides it.
+# Colors: &a, plus &#RRGGBB on 1.16+.
+# Placeholders everywhere: {player}, {displayname}, {world}, {online}, {max}.
+# PlaceholderAPI placeholders work if it is installed.
+
+# Check Modrinth for updates on startup.
+update-check: true
+
+# No messages for players with sservermessages.silent.
+silent:
+  enabled: true
+  # Also hide vanished players.
+  hide-vanished: true
+
+# Private greeting for the joining player.
+welcome:
+  enabled: false
+  message:
+    - "&7Привет, &e{player}&7! Добро пожаловать на сервер."
+    - "&7Сейчас онлайн: &a{online}&7/&a{max}"
 
 join:
   mode: replace
@@ -10,16 +27,14 @@ quit:
   mode: replace
   message: "&e{player} &7вышел с сервера"
 
-# Сообщение для остальных игроков о том, что игрока кикнули. Причина кика, которую видит сам игрок, не меняется.
-# Плейсхолдеры: {player}, {reason}.
+# Shown to other players. Placeholders: {reason}.
 kick:
   mode: replace
   message: "&e{player} &7был кикнут с сервера: &c{reason}"
 
-# Плейсхолдеры: {player}, {killer}, {cause}.
-# Если для причины нет своего текста в causes, берётся общий message.
-# Порядок выбора: player (убил игрок), mob (убил моб), затем имя причины (fall, fire, lava и т.д.).
-# Пустая строка у причины скрывает сообщение для неё.
+# Placeholders: {killer}, {cause}.
+# Lookup order: player, mob, cause name, then message.
+# Empty cause text hides it.
 death:
   mode: replace
   message: "&c{player} &7погиб"
@@ -33,7 +48,7 @@ death:
     drowning: "&c{player} &7утонул"
     void: "&c{player} &7упал в бездну"
     explosion: "&c{player} &7был взорван"
-  # Как называется причина в плейсхолдере {cause}. Если не указано, берётся имя причины.
+  # Names for {cause}.
   names:
     fall: "падение"
     fire: "огонь"
@@ -54,8 +69,8 @@ death:
     wither: "иссушение"
     unknown: "неизвестно"
 
-# Плейсхолдеры: {player}, {advancement}.
-# Заменить и скрыть можно только на Paper и его форках (Purpur, Folia). На Spigot остаётся ванильное сообщение.
+# Placeholders: {advancement}.
+# Replace/hide works on Paper and forks only.
 advancement:
   mode: replace
   message: "&e{player} &7получил достижение &a{advancement}"

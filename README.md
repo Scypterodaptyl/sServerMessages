@@ -15,10 +15,15 @@ One jar covers every server version from **1.8.8 to 26.x**.
   `{advancement}` for advancements.
 - `&` color codes everywhere, plus `&#RRGGBB` hex colors on 1.16+.
 - Hot reload with `/sservermessages reload`.
+- Extra placeholders in every message: `{displayname}`, `{world}`, `{online}`, `{max}`; PlaceholderAPI support.
+- Personal welcome message shown only to the joining player (`welcome`).
+- Silent players: `sservermessages.silent` permission and vanished players (SuperVanish, PremiumVanish,
+  EssentialsX) produce no join/quit/kick/death/advancement messages (`silent`).
+- Update check against Modrinth on startup, logged to the console (`update-check`).
 
 ## Installation
 
-1. Drop `sServerMessages-1.0.0.jar` into the server's `plugins` folder.
+1. Drop `sServerMessages-1.0.1.jar` into the server's `plugins` folder.
 2. Start the server once to generate `plugins/sServerMessages/config.yml`.
 3. Edit the config and run `/sservermessages reload`.
 

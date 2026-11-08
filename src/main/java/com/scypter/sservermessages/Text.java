@@ -56,11 +56,22 @@ public final class Text {
     }
 
     public static String fill(String template, String... pairs) {
-        String result = template;
-        for (int i = 0; i + 1 < pairs.length; i += 2) {
-            result = result.replace(pairs[i], pairs[i + 1] == null ? "" : pairs[i + 1]);
+        StringBuilder result = new StringBuilder(template.length() + 32);
+        int i = 0;
+        outer:
+        while (i < template.length()) {
+            if (template.charAt(i) == '{') {
+                for (int p = 0; p + 1 < pairs.length; p += 2) {
+                    if (template.startsWith(pairs[p], i)) {
+                        result.append(pairs[p + 1] == null ? "" : pairs[p + 1]);
+                        i += pairs[p].length();
+                        continue outer;
+                    }
+                }
+            }
+            result.append(template.charAt(i++));
         }
-        return result;
+        return result.toString();
     }
 
     public static String prettify(String raw) {

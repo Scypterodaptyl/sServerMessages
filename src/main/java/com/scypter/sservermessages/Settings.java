@@ -47,6 +47,10 @@ public final class Settings {
     private volatile List<String> reloadMessage = Collections.emptyList();
     private volatile List<String> errorMessage = Collections.emptyList();
     private volatile List<String> noPermissionMessage = Collections.emptyList();
+    private volatile List<String> welcome = Collections.emptyList();
+    private volatile boolean silentEnabled = true;
+    private volatile boolean hideVanished = true;
+    private volatile boolean updateCheck = true;
 
     public void load(FileConfiguration config, Logger log) {
         join = rule(config.getConfigurationSection("join"), "join", log);
@@ -86,6 +90,15 @@ public final class Settings {
         errorMessage = Text.lines(config, "error-message",
                 "&cОшибка в config.yml, настройки не изменены. Подробности в консоли.");
         noPermissionMessage = Text.lines(config, "no-permission-message", "&cУ вас нет прав на эту команду.");
+
+        ConfigurationSection welcomeSection = config.getConfigurationSection("welcome");
+        welcome = welcomeSection != null && welcomeSection.getBoolean("enabled", false)
+                ? Text.lines(welcomeSection, "message", "")
+                : Collections.<String>emptyList();
+
+        silentEnabled = config.getBoolean("silent.enabled", true);
+        hideVanished = config.getBoolean("silent.hide-vanished", true);
+        updateCheck = config.getBoolean("update-check", true);
     }
 
     private static Rule rule(ConfigurationSection section, String name, Logger log) {
@@ -160,9 +173,26 @@ public final class Settings {
         return noPermissionMessage;
     }
 
+    public List<String> getWelcome() {
+        return welcome;
+    }
+
+    public boolean isSilentEnabled() {
+        return silentEnabled;
+    }
+
+    public boolean isHideVanished() {
+        return hideVanished;
+    }
+
+    public boolean isUpdateCheck() {
+        return updateCheck;
+    }
+
     public String describe() {
         return "вход " + mode(join) + ", выход " + mode(quit) + ", кик " + mode(kick)
-                + ", смерть " + mode(death) + ", достижения " + mode(advancement);
+                + ", смерть " + mode(death) + ", достижения " + mode(advancement)
+                + ", приветствие " + (welcome.isEmpty() ? "off" : "on");
     }
 
     private static String mode(Rule rule) {

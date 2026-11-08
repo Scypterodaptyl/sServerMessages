@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'com.scypter'
-version = '1.0.0'
+version = '1.0.1'
 
 repositories {
     mavenCentral()
@@ -48,6 +48,7 @@ tasks.withType(JavaCompile).configureEach {
 
 tasks.withType(ProcessResources).configureEach {
     filteringCharset = 'UTF-8'
+    inputs.property 'version', project.version
     filesMatching('plugin.yml') {
         expand(version: project.version)
     }
